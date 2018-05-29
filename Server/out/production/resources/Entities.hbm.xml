@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping >
+    <class name="agentie.model.Zbor" table="Zbor">
+        <id name="id" column="idBilet" type="int">
+            <generator class="increment"></generator>
+        </id>
+        <property name="destinatie" column="Destinatie" type="string"/>
+        <property name="plecare" column="DataPlecari" type="string"/>
+        <property name="aeroport" column="Aeroport" type="string"/>
+        <property name="nrLocuri" column="LocuriDisponibile" type="int"/>
+    </class>
+</hibernate-mapping>

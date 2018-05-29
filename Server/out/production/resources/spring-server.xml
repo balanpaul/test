@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="jdbcUtils" class="agentie.persistence.Jdbcutils"/>
+    <bean id="biletRepo" class="agentie.persistence.BiletRepository">
+        <constructor-arg ref="jdbcUtils"/>
+    </bean>
+
+    <bean id="zborRepo" class="agentie.persistence.ZborRepository">
+
+    </bean>
+
+    <bean id="agentRepo" class="agentie.persistence.UserRepository">
+        <constructor-arg ref="jdbcUtils"/>
+    </bean>
+
+    <bean id="service" class="agentie.server.ServerImpl">
+        <constructor-arg ref="agentRepo"/>
+        <constructor-arg ref="zborRepo"/>
+        <constructor-arg ref="biletRepo"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="Agentie"/>
+        <property name="service" ref="service"/>
+        <property name="serviceInterface" value="agentie.service.IServer"/>
+        <property name="servicePort" value="1099"/>
+    </bean>
+</beans>
